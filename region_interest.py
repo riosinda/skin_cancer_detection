@@ -53,9 +53,10 @@ def RSF (LSF, img, mu, nu, epison,step,lambda1,lambda2,kernel):
     LSF = LSF + step*(Length + Penalty + RSFterm);
     return LSF;
 
-original_img = cv2.imread('D:/dataset/HAM10000_images_part_1/ISIC_0024307.jpg')
+original_img = cv2.imread('D:/dataset/HAM10000_images_part_1/ISIC_0024312.jpg')
+original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB)
 
-img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB)
+img = original_img.copy()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.medianBlur(gray,5)   #filtro para reduccion de ruido
 otsu, thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -82,9 +83,31 @@ for i in range(1,num):
     LSF = RSF(LSF, img, mu, nu, epison,step,lambda1,lambda2,kernel);
 
 
-final_image = DrawContour(LSF)
+final_mask = DrawContour(LSF)
+apply_mask = original_img.copy()
+for i in range(0,thresh.shape[0]):
+        for j in range(0,thresh.shape[1]):
+            if final_mask[i,j] != 255:
+                apply_mask[i,j] = 0
 
-plt.imshow(final_image, cmap='gray')
+fig = plt.figure()
+
+fig.add_subplot(1,4,1)
+plt.imshow(original_img, cmap='gray')
+plt.title("Original Image")
+
+fig.add_subplot(1,4,2)
+plt.imshow(thresh, cmap='gray')
+plt.title("mask")
+
+fig.add_subplot(1,4,3)
+plt.imshow(final_mask, cmap='gray')
+plt.title("Final mask")
+
+fig.add_subplot(1,4,4)
+plt.imshow(apply_mask, cmap='gray')
+plt.title("Apply mask")
+
 plt.show()
 
 
