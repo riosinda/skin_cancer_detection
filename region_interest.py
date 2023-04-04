@@ -85,10 +85,17 @@ for i in range(1,num):
 
 final_mask = DrawContour(LSF)
 apply_mask = original_img.copy()
+
+b,g,r = cv2.split(apply_mask)
+
+
 for i in range(0,thresh.shape[0]):
         for j in range(0,thresh.shape[1]):
             if final_mask[i,j] != 255:
-                apply_mask[i,j] = 0
+                r[i,j] = 0
+                g[i,j] = 0
+                b[i,j] = 0
+apply_mask = cv2.merge((b,g,r))
 
 fig = plt.figure()
 
@@ -98,7 +105,7 @@ plt.title("Original Image")
 
 fig.add_subplot(1,4,2)
 plt.imshow(thresh, cmap='gray')
-plt.title("mask")
+plt.title("Mask")
 
 fig.add_subplot(1,4,3)
 plt.imshow(final_mask, cmap='gray')
@@ -109,5 +116,3 @@ plt.imshow(apply_mask, cmap='gray')
 plt.title("Apply mask")
 
 plt.show()
-
-
