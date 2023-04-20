@@ -7,8 +7,10 @@ import math
 
 def DrawContour(LSF,p1,p2):
     plt.clf();
+    new_image = np.zeros(img.shape);
+    fig, ax = plt.subplots()
     plt.imshow(Image),plt.xticks([]), plt.yticks([]);
-    plt.contour(LSF,[0],color = p1,linewidth = p2); 
+    countours = ax.contour(LSF,[0],color = p1,linewidth = p2); 
     plt.show(block=False),plt.pause(0.01);
 
 def mat_math (intput,str):
@@ -52,7 +54,7 @@ def RSF (LSF, img, mu, nu, epison,step,lambda1,lambda2,kernel):
     #plt.imshow(s, cmap ='gray'),plt.show();
     return LSF;
 
-Image = cv2.imread('C:/Users/josei/OneDrive/UAZ/3_TESIS/skin_cancer_detection/mask.jpg',1); 
+Image = cv2.imread('C:/Users/josei/OneDrive/UAZ/2_tesis/skin_cancer_detection/mask.png'); 
 image = cv2.cvtColor(Image,cv2.COLOR_BGR2GRAY)
 img = np.float64(image)
 
@@ -70,7 +72,7 @@ DrawContour(IniLSF,'r',2); # Draw contour
 
 mu = 1;
 nu = 0.003 * 255 * 255;
-num = 50;
+num = 30;
 epison = 1;
 step = 0.1;
 lambda1=lambda2=1;

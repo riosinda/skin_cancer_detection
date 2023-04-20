@@ -53,13 +53,18 @@ def RSF (LSF, img, mu, nu, epison,step,lambda1,lambda2,kernel):
     LSF = LSF + step*(Length + Penalty + RSFterm);
     return LSF;
 
-original_img = cv2.imread('D:/dataset/HAM10000_images_part_1/ISIC_0024312.jpg')
+original_img = cv2.imread('D:/dataset/HAM10000_images_part_1/ISIC_0024307.jpg')
 original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB)
 
 img = original_img.copy()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.medianBlur(gray,5)   #filtro para reduccion de ruido
 otsu, thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+#rellenar huecos
+#kernel = np.ones((3,3), np.uint8)
+#img_dilation = cv2.dilate(thresh, kernel, iterations=3)
+
 
 img = np.float64(thresh)
 draw = np.zeros((thresh.shape[0],thresh.shape[1],3),np.uint8)
@@ -84,6 +89,11 @@ for i in range(1,num):
 
 
 final_mask = DrawContour(LSF)
+
+#rellenar huecos
+#kernel = np.ones((3,3), np.uint8)
+#final_mask = cv2.dilate(final_mask, kernel, iterations=3)
+
 apply_mask = original_img.copy()
 
 b,g,r = cv2.split(apply_mask)
@@ -97,6 +107,7 @@ for i in range(0,thresh.shape[0]):
                 b[i,j] = 0
 apply_mask = cv2.merge((b,g,r))
 
+cv2.imwrite('mask.png',thresh)
 fig = plt.figure()
 
 fig.add_subplot(1,4,1)
