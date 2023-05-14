@@ -27,7 +27,7 @@ def erode(image):
 
 def max_objects(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
-    opening = cv2.morphologyEx(erosion, cv2.MORPH_OPEN, kernel)
+    opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
     contours, hierarchy = cv2.findContours(opening, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     areas =[]
@@ -55,10 +55,10 @@ def borderfilter(image):
     new_image = gray[40:y-40, 40:x-40]
     return new_image
 
-def apply_mask(mask,final_mask):
-    new_shape = (mask.shape[1], mask.shape[0])
+def apply_mask(image,final_mask):
+    new_shape = (image.shape[1], image.shape[0])
     final_mask = cv2.resize(final_mask, new_shape, interpolation = cv2.INTER_LINEAR)
-    apply = cv2.bitwise_and(img, img, mask=final_mask)
+    apply = cv2.bitwise_and(image, image, mask=final_mask)
     return apply
 
 def img_show(img, mask, final_mask, apply_mask,name):
@@ -82,8 +82,8 @@ def img_show(img, mask, final_mask, apply_mask,name):
     plt.title('apply_mask')
 
     fig.savefig('img_save/comparative/'+name[:-4]+'.png')
-    #plt.pause(4)
-    #plt.close(fig)
+    plt.pause(3)
+    plt.close(fig)
 
 def names(cont):
     if cont < 10:
@@ -100,24 +100,27 @@ def names(cont):
 
 #=================================INIT PROGRAM=================================
 #init database 7
-cont=7
+def main():
+    cont=7
+    while True:
+        name, short_name = names(cont)
+        print(short_name)
+        
+        image = cv2.imread(name)
+        img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        filter = borderfilter(image)
+        
+        blur = cv2.medianBlur(filter,3)
+        mask = thresh(blur)
+        erosion = erode(mask)
+        result = max_objects(erosion)
+        final_mask = fill_empty(result)
+        apply = apply_mask(img,final_mask)
+        
+        img_show(img, mask, final_mask, apply, short_name)
+        #cv2.imwrite("img_save/segmented/"+short_name[:-4]+".png", apply)
+        
+        cont=cont+1
 
-while True:
-    name, short_name = names(cont)
-    print(short_name)
-    
-    image = cv2.imread(name)
-    img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    filter =borderfilter(image)
-    
-    blur = cv2.medianBlur(filter,3)
-    mask = thresh(blur)
-    erosion = erode(mask)
-    result = max_objects(erosion)
-    final_mask = fill_empty(result)
-    apply =apply_mask(img,final_mask)
-    
-    img_show(img, mask, final_mask, apply, short_name)
-    cv2.imwrite("img_save/segmented/"+short_name[:-4]+".png", apply)
-    
-    cont=cont+1
+if __name__ == '__main__':
+  main()
