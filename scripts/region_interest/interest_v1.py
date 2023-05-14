@@ -55,6 +55,12 @@ def borderfilter(image):
     new_image = gray[40:y-40, 40:x-40]
     return new_image
 
+def apply_mask(mask,final_mask):
+    new_shape = (mask.shape[1], mask.shape[0])
+    final_mask = cv2.resize(final_mask, new_shape, interpolation = cv2.INTER_LINEAR)
+    apply = cv2.bitwise_and(img, img, mask=final_mask)
+    return apply
+
 def img_show(img, mask, final_mask, apply_mask,name):
     fig = plt.figure()
     fig.suptitle(name)
@@ -91,12 +97,6 @@ def names(cont):
     short_name = split_name[-1]
     return name, short_name
 
-def apply_mask(mask,final_mask):
-    new_shape = (mask.shape[1], mask.shape[0])
-    final_mask = cv2.resize(final_mask, new_shape, interpolation = cv2.INTER_LINEAR)
-    apply = cv2.bitwise_and(img, img, mask=final_mask)
-    return apply
-
 
 #=================================INIT PROGRAM=================================
 #init database 7
@@ -121,8 +121,3 @@ while True:
     cv2.imwrite("img_save/segmented/"+short_name[:-4]+".png", apply)
     
     cont=cont+1
-    
-
-
-
-
