@@ -1,6 +1,6 @@
 # Skin Cancer Detection
 ## Resources
-### images dataset:
+### Images dataset:
 https://www.kaggle.com/datasets/kmader/skin-cancer-mnist-ham10000
 
 ## Contact
