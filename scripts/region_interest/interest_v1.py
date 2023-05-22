@@ -82,8 +82,8 @@ def img_show(img, mask, final_mask, apply_mask,name):
     plt.title('apply_mask')
 
     fig.savefig('img_save/comparative/'+name[:-4]+'.png')
-    plt.pause(3)
-    plt.close(fig)
+    #plt.pause(3)
+    #plt.close(fig)
 
 def names(cont):
     if cont < 10:
@@ -115,10 +115,10 @@ def main():
         erosion = erode(mask)
         result = max_objects(erosion)
         final_mask = fill_empty(result)
-        apply = apply_mask(img,final_mask)
+        apply = apply_mask(image,final_mask)
         
         img_show(img, mask, final_mask, apply, short_name)
-        #cv2.imwrite("img_save/segmented/"+short_name[:-4]+".png", apply)
+        cv2.imwrite("img_save/segmented/"+short_name[:-4]+".png", apply)
         
         cont=cont+1
 
