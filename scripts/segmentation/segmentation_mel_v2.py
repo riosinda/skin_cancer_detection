@@ -86,9 +86,7 @@ def names(cont):
     name = folder + files_names[cont]       # get image name
     short_name = files_names[cont]          # get image short name
     return name, short_name
-    
-#=================================INIT PROGRAM=================================
-#init database 7
+
 def main():
     cont=0
     while True:
@@ -109,8 +107,6 @@ def main():
         #cv2.imwrite("img_save/segmented/"+short_name[:-4]+".png", apply)   # save images
         #cv2.waitKey(0)
         cont=cont+1         #next image
-
-
 
 if __name__ == '__main__':
   main()                        # run main program
