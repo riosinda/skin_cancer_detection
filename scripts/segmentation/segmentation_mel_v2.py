@@ -81,7 +81,7 @@ def img_show(img, mask, final_mask, apply_mask,name):
     plt.close(fig)
 
 def names(cont):    
-    folder = "C:/Users/josei/OneDrive/UAZ/2_Tesis/skin_cancer_detection/dataset/image_separate/mel/"    # folder path
+    folder = "D:/SkinCancerDatasets/ISIC/images_separate_type/melanoma/"    # folder path
     files_names = os.listdir(folder)        # get all files names
     name = folder + files_names[cont]       # get image name
     short_name = files_names[cont]          # get image short name
@@ -91,21 +91,32 @@ def main():
     cont=0
     while True:
         name, short_name = names(cont)                  # get image name
-        print(short_name)
-        
-        image = cv2.imread(name)                        # read image
-        img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)    # convert to RGB
-        filter = borderfilter(image)                    # remove border
-        blur = cv2.medianBlur(filter,3)                 # apply median filter
-        mask = thresh(blur)                             # apply threshold
-        erosion = erode(mask)                           # apply erosion
-        result = max_objects(erosion)                   # apply max objects
-        final_mask = fill_empty(result)                 # fill empty spaces
-        apply = apply_mask(img,final_mask)              # apply mask
-        
-        img_show(img, mask, final_mask, apply, short_name)                  # show images
-        #cv2.imwrite("img_save/segmented/"+short_name[:-4]+".png", apply)   # save images
-        #cv2.waitKey(0)
+
+        bad_images_file = open('../../csv_files/bad_images.csv', 'r')    # open csv file
+        bad_images = bad_images_file.read().splitlines()                # get bad images names
+        bad_images_file.close()                                         # close csv file
+
+        if short_name not in bad_images:                                    # check if image is in bad images
+            print(short_name)
+
+            image = cv2.imread(name)                        # read image
+            img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)    # convert to RGB
+            filter = borderfilter(image)                    # remove border
+            blur = cv2.medianBlur(filter,3)                 # apply median filter
+            mask = thresh(blur)                             # apply threshold
+            erosion = erode(mask)                           # apply erosion
+            result = max_objects(erosion)                   # apply max objects
+            final_mask = fill_empty(result)                 # fill empty spaces
+            apply = apply_mask(img,final_mask)              # apply mask
+            
+            # show images
+            img_show(img, mask, final_mask, apply, short_name)
+
+            # save images
+            #savefolder = "D:/SkinCancerDatasets/ISIC/images_separate_type/segmentations/melanoma_segmented/"    # folder path
+            #cv2.imwrite(savefolder + short_name, apply)   
+            #cv2.waitKey(0)
+            
         cont=cont+1         #next image
 
 if __name__ == '__main__':
