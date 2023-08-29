@@ -3,11 +3,10 @@ import csv
 
 def count_files_per_folder(directory):                  # Count number of files per folder
     file_count_per_folder = {}
-
     for item in os.listdir(directory):                  # Iterate through folders
         full_path = os.path.join(directory, item)
 
-    if os.path.isdir(full_path):                        # Check if item is a folder
+        if os.path.isdir(full_path):                        # Check if item is a folder
             # Count number of files in folder
             num_files = len([filename for filename in os.listdir(full_path) if os.path.isfile(os.path.join(full_path, filename))])
             file_count_per_folder[item] = num_files     # Add folder and number of files to dictionary
@@ -23,8 +22,8 @@ def save_results_to_csv(counts, filename):              # Save results to csv fi
             csv_writer.writerow([folder, num_files])
 
 
-directory = 'D:/SkinCancerDatasets/ISIC/images_separate_type/'      # Input directory
+directory = 'D:/SkinCancerDatasets/PAD-UFES-20/separate_diagnosis'      # Input directory
 counts = count_files_per_folder(directory)
 
-csv_filename = '../../csv_files/diagnosis_count.csv'    # Output csv file
+csv_filename = '../../csv_files/count/PADUFES20_diagnosis_count.csv'    # Output csv file
 save_results_to_csv(counts, csv_filename)
