@@ -1,13 +1,14 @@
 import random
 import shutil
 import os
+import csv
 
 # Function to generate random numbers
 def random_nums(low, upper, n):
     num_posibles = list(range(low, upper + 1))
     random_nums = random.sample(num_posibles, n)
     return random_nums
-
+# Function to generate file name
 def file_name(folder,count):
     if folder == "melanoma":
         return f"mel_{count:05}.jpg"
@@ -17,6 +18,17 @@ def file_name(folder,count):
         return f"bcc_{count:05}.jpg"
     elif folder == "squamous cell carcinoma":
         return f"scc_{count:05}.jpg"
+# Function to filter files
+def filter_files(files):
+    path = "../../csv_files/ISCI_bad_images.csv"
+    bad_images = set()
+    with open(path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            bad_images.add(row[0])
+    good_images = [file for file in files if file not in bad_images]
+    return good_images
+
 
 # Function to move images
 def main(folders, max_images):
@@ -31,7 +43,8 @@ def main(folders, max_images):
             os.makedirs(new_folder)         # Create folder
 
         files = os.listdir(original_folder)
-        
+        files = filter_files(files)
+
         if len(files) < max_images:
             max_images = len(files)
         
