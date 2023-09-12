@@ -8,6 +8,7 @@ def random_nums(low, upper, n):
     num_posibles = list(range(low, upper + 1))
     random_nums = random.sample(num_posibles, n)
     return random_nums
+
 # Function to generate file name
 def file_name(folder,count):
     if folder == "melanoma":
@@ -18,6 +19,7 @@ def file_name(folder,count):
         return f"bcc_{count:05}.jpg"
     elif folder == "squamous cell carcinoma":
         return f"scc_{count:05}.jpg"
+    
 # Function to filter files
 def filter_files(files):
     path = "../../csv_files/ISCI_bad_images.csv"
@@ -31,8 +33,9 @@ def filter_files(files):
 
 
 # Function to move images
-def main(folders, max_images):
+def main(folders):
     for folder in folders:
+        max_images = 40000#Max number of images to move
         original_folder = "D:/SkinCancerDatasets/ISIC/images_separate_type/" + folder + "/"
         new_folder = "D:/SkinCancerDatasets/FinalDataset/images/" + folder + "/"
         
@@ -58,7 +61,7 @@ def main(folders, max_images):
 
 
 folders = ["melanoma", "nevus", "basal cell carcinoma", "squamous cell carcinoma"] #Name of the folders to move
-max_images = 1250 #Max number of images to move
+
 
 if __name__ == '__main__':
-    main(folders, max_images)
+    main(folders)
