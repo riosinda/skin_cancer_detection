@@ -79,8 +79,8 @@ def main(folders, max_width, max_height):
             cv2.imwrite(new_path + file, resized_img)
             cont += 1
 
-max_width = 1080
-max_height = 1080
+max_width = 224
+max_height = 224
 
 folders = ["melanoma", "nevus", "basal cell carcinoma", "squamous cell carcinoma"]
 

@@ -22,7 +22,7 @@ def create_folder(path):
     else:
         os.makedirs(path)         # Create folder
 
-path = "D:/SkinCancerDatasets/FinalDataset/images/"
+path = "D:/SkinCancerDatasets/dataset/images/resized/"
 folders = os.listdir(path)
 
 for folder in folders:
@@ -34,8 +34,8 @@ for folder in folders:
     
     original_folder = path + folder + "/"
     
-    train_folder = "D:/SkinCancerDatasets/FinalDataset/train/" + folder + "/"
-    test_folder = "D:/SkinCancerDatasets/FinalDataset/test/" + folder + "/"
+    train_folder = "D:/SkinCancerDatasets/dataset/train/" + folder + "/"
+    test_folder = "D:/SkinCancerDatasets/dataset/test/" + folder + "/"
     
     create_folder(train_folder)
     create_folder(test_folder)

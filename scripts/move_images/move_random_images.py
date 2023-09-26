@@ -35,7 +35,7 @@ def filter_files(files):
 # Function to move images
 def main(folders):
     for folder in folders:
-        max_images = 40000#Max number of images to move
+        max_images = 500#Max number of images to move
         original_folder = "D:/SkinCancerDatasets/ISIC/images_separate_type/" + folder + "/"
         new_folder = "D:/SkinCancerDatasets/FinalDataset/images/" + folder + "/"
         

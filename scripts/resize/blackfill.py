@@ -33,12 +33,11 @@ def comprobation_resize(image, max_width, max_height):
         image = np.concatenate((image,black),axis=0)
     return image
 
-
 def main(folders, max_width, max_height):
     for folder in folders:
         print(f"Moving and resizing images of {folder}...")
-        path = "D:/SkinCancerDatasets/FinalDataset/images/" + folder + "/"
-        new_path = "D:/SkinCancerDatasets/FinalDataset/images_resized//black" + folder + "/"
+        path = "D:/SkinCancerDatasets/dataset/images/" + folder + "/"
+        new_path = "D:/SkinCancerDatasets/dataset/images/resized/" + folder + "/"
         create_folder(new_path)
         files = os.listdir(path)
 
@@ -65,8 +64,8 @@ def main(folders, max_width, max_height):
             cv2.imwrite(new_path + file, resized_img)
             cont += 1
 
-max_width = 1080
-max_height = 1080
+max_width = 224
+max_height = 224
 
 folders = ["melanoma", "nevus", "basal cell carcinoma", "squamous cell carcinoma"]
 
