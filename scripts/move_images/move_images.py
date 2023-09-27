@@ -6,11 +6,11 @@ import csv
 class MoveImages:
     # Function to generate file name
     def exist_folder(self,folder):
-        if os.path.exists(self.new_folder):      # If folder does exist
-            shutil.rmtree(self.new_folder)       # Delete folder
-            os.makedirs(self.new_folder)         # Create folder
+        if os.path.exists(folder):      # If folder does exist
+            shutil.rmtree(folder)       # Delete folder
+            os.makedirs(folder)         # Create folder
         else:
-            os.makedirs(self.new_folder)         # Create folder
+            os.makedirs(folder)         # Create folder
 
     def file_name(self,folder):
         if folder == "melanoma/":
