@@ -34,13 +34,17 @@ def comprobation_resize(image, max_width, max_height):
     return image
 
 def main(folders, max_width, max_height):
+
     for folder in folders:
         print(f"Moving and resizing images of {folder}...")
-        path = "D:/SkinCancerDatasets/dataset/images/" + folder + "/"
-        new_path = "D:/SkinCancerDatasets/dataset/images/resized/" + folder + "/"
+        path = "D:/SkinCancerDatasets/images_dataset/images/" + folder + "/"
+        if folder == "basal cell carcinoma":
+            new_path = "D:/SkinCancerDatasets/images_dataset/resized/black/bcc/"
+        elif folder == "squamous cell carcinoma":
+            new_path = "D:/SkinCancerDatasets/images_dataset/resized/black/datagen/scc/"
         create_folder(new_path)
         files = os.listdir(path)
-
+        contresized = 0
         cont = 1
         for file in files:
             image = cv2.imread(path + file)
@@ -49,11 +53,13 @@ def main(folders, max_width, max_height):
             resized_img = resize(image, max_width, max_height)
             height, width, channels = resized_img.shape
             if width < max_width:
+                contresized += 1
                 black = np.zeros((height,int((max_width-width)/2),channels),dtype=np.uint8)
                 resized_img = np.concatenate((resized_img,black),axis=1)
                 resized_img = np.concatenate((black,resized_img),axis=1)
             
             if height < max_height:
+                contresized += 1
                 black = np.zeros((int((max_height-height)/2),max_width,channels),dtype=np.uint8)
                 resized_img = np.concatenate((resized_img,black),axis=0)
                 resized_img = np.concatenate((black,resized_img),axis=0)
@@ -63,11 +69,12 @@ def main(folders, max_width, max_height):
             print(f"Image {cont}/{len(files)} resized",end="\r")
             cv2.imwrite(new_path + file, resized_img)
             cont += 1
+        print(f"{contresized} images resized of {folder}")
 
-max_width = 224
-max_height = 224
+max_width = 299
+max_height = 299
 
-folders = ["melanoma", "nevus", "basal cell carcinoma", "squamous cell carcinoma"]
+folders = ["basal cell carcinoma", "squamous cell carcinoma"]
 
 if __name__ == "__main__":
     main(folders, max_width, max_height)
