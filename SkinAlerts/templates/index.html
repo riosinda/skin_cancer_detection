@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinAlerts</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logowhite.svg') }}" type="image/png">
+</head>
+
+<body>
+    <header>
+        <a href="/" class="logo">
+            <img src="{{ url_for('static', filename='images/logobar.png') }}" alt="SkinAlerts Logo">
+            Skin Alerts
+        </a>
+        
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/information">Information</a>
+            <a href="/detection">Detection</a>
+            <a href="/database">Database</a>
+        </nav>
+        <nav>
+            <a href="/dataprivacy">Data privacy</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+</body>
+
+</html>
