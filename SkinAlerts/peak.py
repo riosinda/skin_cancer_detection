@@ -24,9 +24,24 @@ def about():
 def information():
     return render_template('information.html')
 
+@app.route('/detection')
+def detection():
+    return render_template('detection.html')
 
-@app.route('/detection', methods=['GET', 'POST'])
-def detection(model=model):
+@app.route('/database')
+def database():
+    return render_template('database.html')
+
+@app.route('/dataprivacy')
+def dataprivacy():
+    return render_template('dataprivacy.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/detection/sccbcc', methods=['GET', 'POST'])
+def sccbcc(model=model):
     if request.method == "POST":
         image = request.files['file']
 
@@ -47,24 +62,8 @@ def detection(model=model):
         else:
             print('scc')
 
-        return render_template('detection.html')
-        
-    return render_template('detection.html')
-
-
-
-@app.route('/database')
-def database():
-    return render_template('database.html')
-
-@app.route('/dataprivacy')
-def dataprivacy():
-    return render_template('dataprivacy.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
+        return render_template('sccbcc.html')
+    return render_template('sccbcc.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

@@ -28,13 +28,33 @@
             <a href="/contact">Contact</a>
         </nav>
     </header>
-    
-    <form method="post" action="/detection" enctype="multipart/form-data">
-        
-        <p>Upload an image of your skin lesion to get a prediction of whether it is benign or malignant.</p>
-        <input type="file" name="file" id="file" autocomplete="off" required>
 
-        <input type="submit" value="Submit">
+    <div class = "wrapper">
+        <h1> Services </h1>
+        <div class ="container">
+            <div class = "box">
+                <img src="{{ url_for('static', filename='images/bcc_00748.jpg') }}">
+                <h3>Basal Cell Carcinoma Vs Squamous Cell Carcinoma</h3>
+                <p>This service will help you classify the 2 most common types of skin cancer. </p>
+                <a href="/detection/sccbcc" class="btn">Start</a>
+            </div>
+
+            <div class = "box">
+                <img src="{{ url_for('static', filename='images/ISIC_0024319.jpg') }}">
+                <h3>Benign vs Malignant</h3>
+                <p>This service will help you to identify if the skin lesson is cancer malignant or isn't cancer. </p>
+                <a href="/detection/sccbcc" class="btn">Start</a>
+            </div>
+
+            <div class = "box">
+                <img src="{{ url_for('static', filename='images/ISIC_0000155.jpg') }}">
+                <h3>Melanoma vs Non-Melanoma</h3>
+                <p>This service will help you classify if the skin lesson is melanoma or no. </p>
+                <a href="/detection/sccbcc" class="btn">Start</a>
+            </div>
+            
+        </div>
+    </div>
         
 </body>
 </html>
