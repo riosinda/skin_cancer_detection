@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkinAlerts</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/logowhite.svg') }}" type="image/png">
 </head>
-
 <body>
+
     <header>
         <a href="/" class="logo">
             <img src="{{ url_for('static', filename='images/logobar.png') }}" alt="SkinAlerts Logo">
             Skin Alerts
         </a>
-        
-        <nav>
-            <a href="/">Home</a>
-            <a href="/information">Information</a>
-            <a href="/detection">Detection</a>
-            <a href="/database">Database</a>
-        </nav>
-        
-        <nav>
-            <a href="/dataprivacy">Data privacy</a>
-            <a href="/contact">Contact</a>
+        <button id="abrir" class="abrir-menu"><i class="bi bi-list"></i></button>
+        <nav class="nav" id="nav">
+            <button class="cerrar-menu" id="cerrar"><i class="bi bi-x"></i></button>
+            <ul class="nav-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/information">Information</a></li>
+                <li><a href="/detection">Detection</a></li>
+                <li><a href="/database">Database</a></li>
+                <li><a href="/dataprivacy">Data privacy</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
         </nav>
     </header>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
-
 </html>

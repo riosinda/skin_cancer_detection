@@ -1,32 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-/*
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
-    font-family: 'Poppins', sans-serif;
-}
-*/
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: .2s linear;
     font-family: 'Poppins', sans-serif;
 }
 
 header {
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 120px;
-    background: #01034D;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: #01034D;
+    color : #fff;
 }
 
 .logo {
@@ -37,20 +24,74 @@ header {
     text-decoration: none;
     font-weight: 600;
 }
-
 .logo img {
     margin-right: 10px; /* Espacio a la derecha de la imagen para separarla del texto */
     max-width: 100px; /* Ancho máximo de la imagen */
     max-height: 30px; /* Altura máxima de la imagen */
 }
+.nav-list {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+}
 
-nav a {
-    font-size: 18px;
-    color: #fff;
+.nav-list li a {
     text-decoration: none;
-    font-weight: 500;
-    margin-left: 35px;
-    transition: .3s;
+    color: #fff;
+}
+
+.abrir-menu,
+.cerrar-menu {
+    display: none;
+}
+
+@media screen and (max-width: 900px) {
+    .abrir-menu,
+    .cerrar-menu {
+        display: block;
+        border: 0;
+        font-size: 1.25rem;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .abrir-menu {
+        color: #fff;
+    }
+
+    .cerrar-menu {
+        color: #fff;
+    }
+
+    .nav {
+        opacity: 0;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 1rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #1c1c1c;
+        padding: 2rem;
+        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+    }
+
+    .nav.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .nav-list li a {
+        color: #ecececec;
+    }
 }
 
 .wrapper{
@@ -123,3 +164,4 @@ h1{
         padding: 20px;
     }
 }
+
