@@ -15,6 +15,7 @@ header {
     padding: 2rem;
     background-color: #01034D;
     color : #fff;
+    margin-bottom: 50px;
 }
 
 .logo {
@@ -168,13 +169,14 @@ h1{
 
 /*===================Form========================================*/
 .body2{
+    margin-top: 50px;
     display : flex;
-    height: 100vh;
     justify-content: center;
     align-items: center;
     padding: 10px;
     background: #fff;
 }
+
 .container2{
     max-width: 700px;
     width: 100%;
@@ -182,11 +184,13 @@ h1{
     padding: 20px 30px;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
 }
+
 .container2 .title{
     font-size: 25px;
     font-weight: 500;
     position: relative;
 }
+
 .container2 .title::before{
     content: "";
     position: absolute;
@@ -196,12 +200,14 @@ h1{
     width: 30px;
     background: #01034D;
 }
+
 .container2 form .user-details{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px 0 12px 0;
 }
+
 form .user-details .input-box{
     margin-bottom: 20px 0 12px 0;
     width: calc(100% / 2 - 20px);
@@ -211,6 +217,7 @@ form .user-details .input-box{
     font-weight: 500;
     margin-bottom: 5px;
 }
+
 .user-details .input-box input{
     height: 45px;
     width: 100%;
@@ -222,6 +229,7 @@ form .user-details .input-box{
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
+
 .user-details .input-box input:focus,
 .user-details .input-box input:valid{
     border-color: #01034D;

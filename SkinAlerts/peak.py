@@ -65,5 +65,56 @@ def sccbcc(model=model):
         return render_template('sccbcc.html')
     return render_template('sccbcc.html')
 
+@app.route('/detection/malben', methods=['GET', 'POST'])
+def malben(model=model):
+    if request.method == "POST":
+        image = request.files['file']
+
+        if image.filename == '':
+            print('No selected file')
+            return redirect(request.url)
+        
+        filename = secure_filename(image.filename)
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        img = cv.imread('D:/SkinAlertsDataset/' + filename)
+        rimg1 = cv.resize(img, dsize=(150, 150), interpolation=cv.INTER_CUBIC)
+        image = rimg1.astype('float32') / 255
+
+        if round(model.predict(np.array([image]))[0][0]) == 1:
+            print('bcc')
+        else:
+            print('scc')
+
+        return render_template('malben.html')
+    return render_template('malben.html')
+
+@app.route('/detection/melnomel', methods=['GET', 'POST'])
+def melnomel(model=model):
+    if request.method == "POST":
+        image = request.files['file']
+
+        if image.filename == '':
+            print('No selected file')
+            return redirect(request.url)
+        
+        filename = secure_filename(image.filename)
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        img = cv.imread('D:/SkinAlertsDataset/' + filename)
+        rimg1 = cv.resize(img, dsize=(150, 150), interpolation=cv.INTER_CUBIC)
+        image = rimg1.astype('float32') / 255
+
+        if round(model.predict(np.array([image]))[0][0]) == 1:
+            print('bcc')
+        else:
+            print('scc')
+
+        return render_template('melnomel.html')
+    return render_template('melnomel.html')
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
