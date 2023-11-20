@@ -169,7 +169,7 @@ h1{
 /*===================Form========================================*/
 .body2{
     display : flex;
-    height: 75vh;
+    height: 100vh;
     justify-content: center;
     align-items: center;
     padding: 10px;
@@ -228,15 +228,15 @@ form .user-details .input-box{
 }
 
 form .gender-details .gender-title{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 }
 
 form .gender-details .category{
     display: flex;
-    width: 80%;
+    width: 100%;
     margin: 14px 0;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .gender-details .category label{
@@ -283,4 +283,38 @@ form .button input{
     cursor: pointer;
     transition: all 0.3s ease;
     background: #01034D;
+}
+
+.uploadimage {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.upload-title {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px; /* Ajusta el espacio entre el título y el botón */
+}
+
+.file-label {
+    display: inline-block;
+    height: 100px;
+    width: 150px;
+    border-radius: 6px;
+    border: 1px dashed #01034D;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.file-label:hover {
+    background-color: #01034D;
+    color: #fff;
+}
+
+form input[type="file"] {
+    display: none;
 }
