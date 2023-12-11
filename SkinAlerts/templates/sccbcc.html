@@ -91,6 +91,17 @@
                     <input type="submit" value="Upload">
                 </div>
             </form>
+            <!-- Resultados -->
+            <div class="result" id="result-container">
+                <div class="result" id="result-container">
+                    {% if result %}
+                    <p>The injury is: </p>
+                    <div class = "title">{{ result }} </div>
+                        
+                    {% endif %}
+                </div>
+                <!-- Aquí se mostrará el resultado después de enviar el formulario -->
+            </div>
         </div>
     </div>
 </body>
@@ -99,5 +110,28 @@
         var fileName = input.files[0].name;
         document.getElementById('file-label').innerText = fileName;
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('#detection-form');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var formData = new FormData(form);
+
+            fetch('/detection/sccbcc', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())  // Asumiendo que el servidor responde con JSON
+                .then(data => {
+                    // Muestra la respuesta en el contenedor de resultados
+                    var resultContainer = document.getElementById('result-container');
+                    resultContainer.innerHTML = '<p>' + data.message + '</p>';  // Cambia "message" por el nombre correcto en tu respuesta del servidor
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
 </script>
 </html>

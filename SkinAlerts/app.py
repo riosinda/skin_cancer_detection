@@ -77,10 +77,9 @@ def sccbcc(model=model):
         image_array = rimg1.astype('float32') / 255
 
         if round(model.predict(np.array([image_array]))[0][0]) == 1:
-            result = 'bcc'
+            result = 'Basal Cell Carcinoma'
         else:
-            result = 'scc'
-        
+            result = 'Squamous cell carcinoma'
         print(result)
         data = {
             'date': date,
@@ -94,7 +93,7 @@ def sccbcc(model=model):
 
         save_to_csv(data)
 
-        return render_template('sccbcc.html')
+        return render_template('sccbcc.html', result=result)
     return render_template('sccbcc.html')
 
 @app.route('/detection/malben', methods=['GET', 'POST'])
